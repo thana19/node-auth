@@ -1,14 +1,24 @@
-const http = require('http')
+const Fastify = require('fastify')
 
 const hostname = 'localhost'
 const port = 3000
 
-const server = http.createServer((req, res) => {
-    console.log(`inside create server`)
-    res.setHeader('Content-Type', 'text/plain')
-    res.end('Here is Create server')
+const fastifyApp = Fastify({
+    logger: true
 })
 
-server.listen(port, hostname, () => {
+// console.log('fastityApp ->', fastifyApp)
+
+fastifyApp.get('/', async (request, reply) => {
+    reply.send('OK')
+})
+
+fastifyApp.post('/users', async (request, reply) => {
+    console.log('request ->', request.body)
+    const requestBody = { ...request.body }
+    reply.send(requestBody)
+})
+
+fastifyApp.listen(port, hostname, () => {
     console.log(`inside create server port= ${port}`)
 })
