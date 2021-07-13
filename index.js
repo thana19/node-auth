@@ -10,14 +10,13 @@ const fastifyApp = Fastify({
 
 // console.log('fastityApp ->', fastifyApp)
 
-
 fastifyApp.register(FastifySwagger, {
     routePrefix: '/documents',
     swagger: {
         info: {
             title: 'Simple LLDD',
             description: 'Example 101',
-            version: '1.0'
+            version: '1.1'
         }
     },
     exposeRoute: true
