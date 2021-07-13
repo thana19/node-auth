@@ -1,4 +1,5 @@
 const Fastify = require('fastify')
+const FastifySwagger = require('fastify-swagger')
 
 const hostname = 'localhost'
 const port = 3000
@@ -9,8 +10,17 @@ const fastifyApp = Fastify({
 
 // console.log('fastityApp ->', fastifyApp)
 
-fastifyApp.get('/', async (request, reply) => {
-    reply.send('OK')
+
+fastifyApp.register(FastifySwagger, {
+    routePrefix: '/documents',
+    swagger: {
+        info: {
+            title: 'Simple LLDD',
+            description: 'Example 101',
+            version: '1.0'
+        }
+    },
+    exposeRoute: true
 })
 
 const usersRoute = {
@@ -56,6 +66,14 @@ fastifyApp.route(usersRoute)
 //     const requestBody = { ...request.body }
 //     reply.send(requestBody)
 // })
+
+fastifyApp.get('/', async (request, reply) => {
+    reply.send('OK')
+})
+
+fastifyApp.patch('/users', async (request, reply) => {
+    reply.send('User has been updated')
+})
 
 fastifyApp.listen(port, hostname, () => {
     console.log(`inside create server port= ${port}`)
