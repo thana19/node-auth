@@ -1,6 +1,5 @@
 const Fastify = require('fastify')
 const FastifySwagger = require('fastify-swagger')
-const helpers = require('./helpers')
 
 const hostname = 'localhost'
 const port = 3000
@@ -54,7 +53,7 @@ const usersRoute = {
         const requestBody = { ...request.body, mergedObject: true}
         reply.send({
             ...requestBody,
-            userId: helpers.generateUserId(10)
+            userId: '00123'
         })
     }
 }
